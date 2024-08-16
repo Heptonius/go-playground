@@ -14,7 +14,6 @@ type person struct {
 }
 
 func main() {
-	var agent person
 	jim := person{
 		firstName: "Jimbo",
 		lastName:  "Clash",
@@ -23,11 +22,15 @@ func main() {
 			zipCode: 12322,
 		}}
 
-	agent.firstName = "Jason"
-	agent.lastName = "Baktus"
-	agent.contact.email = "Jason.b@murder.com"
+	jimPointer := &jim
+	jimPointer.updateFirstName("Jimmy")
+	jim.print()
+}
 
-	fmt.Println(agent)
-	fmt.Printf("%+v", agent)
-	fmt.Printf("%+v", jim)
+func (pPointer *person) updateFirstName(newFirstName string) {
+	(*pPointer).firstName = newFirstName
+}
+
+func (p person) print() {
+	fmt.Printf("%+v", p)
 }
